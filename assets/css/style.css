@@ -1,0 +1,767 @@
+/* * File CSS Baru untuk E-Commerce
+ * Skema Warna: Teal/Green
+ * FITUR: Hamburger Menu
+ * FIX: Tombol Halaman Detail
+ * UPDATE: Home Split Layout
+ * TAMBAHAN: Search Bar
+ */
+
+:root {
+    --primary-color: #0d9488; /* teal-600 */
+    --primary-dark: #0f766e;  /* teal-700 */
+    --secondary-color: #334155; /* slate-700 */
+    --text-color: #475569;      /* slate-600 */
+    --text-light: #64748b;    /* slate-500 */
+    --bg-light: #f1f5f9;      /* slate-100 */
+    --bg-white: #ffffff;
+    --border-color: #e2e8f0;    /* slate-200 */
+    --success-bg: #f0fdf4;    /* green-50 */
+    --success-text: #166534; /* green-800 */
+    --success-border: #86efac; /* green-300 */
+    --error-bg: #fef2f2;      /* red-50 */
+    --error-text: #991b1b;   /* red-800 */
+    --error-border: #fecaca;   /* red-300 */
+    --warning-bg: #fffbeb;   /* yellow-50 */
+    --warning-text: #b45309; /* yellow-700 */
+    --warning-border: #fde68a; /* yellow-300 */
+}
+
+/* --- Base --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.2s ease;
+}
+a:hover {
+    color: var(--primary-dark);
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+main.content-wrapper {
+    flex-grow: 1;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+/* --- Header & Footer --- */
+.main-header {
+    background-color: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+.logo i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+.logo:hover {
+    color: var(--secondary-color);
+}
+
+/* ====================================================== */
+/* STYLE SEARCH FORM */
+/* ====================================================== */
+.search-form {
+    display: flex;
+    gap: 0.5rem;
+    flex-grow: 1; /* Ambil ruang sisa */
+    max-width: 400px; /* Batasi lebar */
+    margin: 0 1.5rem; /* Beri jarak */
+}
+.search-form .form-control {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+.search-form .btn {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+/* ====================================================== */
+/* AKHIR STYLE SEARCH FORM */
+/* ====================================================== */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    font-weight: 600;
+    color: var(--text-light);
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+}
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.main-footer {
+    background-color: var(--secondary-color);
+    color: var(--bg-light);
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+
+/* --- Tombol --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+.btn i {
+    font-size: 1.1em;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--bg-white);
+}
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    color: var(--bg-white);
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+}
+
+.btn-secondary {
+    background-color: var(--bg-light);
+    color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+    background-color: var(--border-color);
+    color: var(--secondary-color);
+}
+
+.btn-danger {
+    background-color: var(--error-text);
+    color: var(--bg-white);
+}
+.btn-danger:hover {
+    background-color: #b91c1c; /* red-800 */
+    color: var(--bg-white);
+}
+
+.btn-sm {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+/* --- Form & Card --- */
+.card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    overflow: hidden;
+}
+
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background-color: var(--bg-white);
+    color: var(--secondary-color);
+}
+.form-control:focus,
+.form-control:active {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+}
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* --- Halaman Home (Split Layout) --- */
+.home-split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 2.5rem;
+    /* Background gradient warna tema */
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    color: var(--bg-white);
+    padding: 4rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 118, 110, 0.3);
+}
+
+.home-text-content h1 {
+    font-size: 2.75rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.home-text-content p {
+    font-size: 1.1rem;
+    color: #d1faea; /* Warna teal yang sangat muda */
+    line-height: 1.7;
+    max-width: 90%;
+}
+
+.home-image-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-hero-image {
+    width: 100%;
+    max-width: 350px; /* Batas ukuran gambar */
+    height: auto;
+    aspect-ratio: 1 / 1; /* Paksa rasio 1:1 (kotak) */
+    object-fit: cover;
+    border-radius: 12px;
+    border: 4px solid var(--bg-white);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.home-cta-button {
+    margin-top: 2rem; /* Jarak dari gambar */
+    /* Tombol dibuat putih agar kontras */
+    background-color: var(--bg-white);
+    color: var(--primary-dark);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.home-cta-button:hover {
+    background-color: var(--bg-light);
+    color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+
+/* --- Product Grid --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+}
+.product-card-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: #eee;
+}
+.product-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.product-card:hover .product-card-image img {
+    transform: scale(1.05);
+}
+.product-card-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.product-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+.product-card-price {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+}
+.product-card-stock {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+.product-card-actions {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+.product-card-actions .btn {
+    width: 100%;
+}
+
+/* --- Product Detail --- */
+.product-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+}
+.product-detail-gallery img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+.product-detail-info .name {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+.product-detail-info .price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+}
+.product-detail-info .stock {
+    font-size: 1rem;
+    font-weight: 600;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
+    margin-bottom: 1.5rem;
+}
+.product-detail-info .stock.habis {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+}
+.product-detail-info .description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    white-space: pre-wrap;
+}
+
+/* FIX: Tombol Detail Produk */
+.product-detail-actions {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    gap: 1rem;
+}
+.product-detail-actions .btn {
+    flex-grow: 1; 
+    flex-basis: 200px; 
+    font-size: 1rem; 
+}
+
+.product-detail-actions .btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+}
+.product-detail-actions .btn-whatsapp:hover {
+    background-color: #128C7E;
+    color: white;
+}
+.btn-disabled {
+    background-color: #ccc;
+    color: #777;
+    cursor: not-allowed;
+}
+
+/* --- Status & Checkout --- */
+.status-card {
+    padding: 2rem;
+}
+.status-info {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+.status-info strong {
+    color: var(--secondary-color);
+    min-width: 140px;
+    display: inline-block;
+}
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.status-badge-pending {
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
+}
+.status-badge-success {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+}
+.status-badge-failed {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+}
+
+.checkout-summary {
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+.checkout-summary h3 {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* --- Admin --- */
+.admin-nav {
+    background-color: var(--secondary-color);
+}
+.admin-nav .navbar {
+    height: 60px;
+}
+.admin-nav .logo {
+    color: var(--bg-white);
+}
+.admin-nav .logo i {
+    color: var(--primary-color);
+}
+.admin-nav .nav-links a {
+    color: var(--bg-light);
+}
+.admin-nav .nav-links a:hover,
+.admin-nav .nav-links a.active {
+    color: var(--bg-white);
+    border-bottom-color: var(--primary-color);
+}
+.admin-nav .btn-logout {
+    background-color: var(--primary-color);
+    color: var(--bg-white);
+    padding: 0.5rem 1rem;
+}
+.admin-nav .btn-logout:hover {
+    background-color: var(--primary-dark);
+    color: var(--bg-white);
+}
+
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--bg-light);
+    padding: 20px;
+}
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+}
+.login-box .logo {
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.login-box .btn {
+    width: 100%;
+}
+.login-box .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-weight: 600;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--bg-white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.admin-table th,
+.admin-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+.admin-table th {
+    background-color: var(--bg-light);
+    font-size: 0.875rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+}
+.admin-table td {
+    vertical-align: middle;
+}
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+.admin-table img.product-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.admin-table .actions {
+    display: flex;
+    gap: 0.5rem;
+}
+.admin-table .actions .btn {
+    padding: 0.5rem;
+}
+
+.admin-table .status-form select,
+.admin-table .status-form textarea {
+    margin-bottom: 0.5rem;
+}
+
+.admin-table .customer-details {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+.admin-table .customer-details strong {
+    color: var(--secondary-color);
+}
+
+.message-box {
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+.message-box.success {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border-color: var(--success-border);
+}
+.message-box.error {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border-color: var(--error-border);
+}
+.message-box.info {
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
+    border-color: var(--warning-border);
+}
+.message-box.admin-note {
+    background-color: #eef2ff; /* indigo-50 */
+    color: #3730a3; /* indigo-800 */
+    border-color: #c7d2fe; /* indigo-200 */
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+}
+
+/* --- Tambahan untuk Hamburger Menu --- */
+.hamburger-btn {
+    display: none; /* Sembunyi di desktop */
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    z-index: 10; /* Pastikan di atas menu */
+}
+
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+    .product-detail-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Responsive Home Split */
+    .home-split-layout {
+        grid-template-columns: 1fr; /* Tumpuk di tablet */
+        gap: 2rem;
+        padding: 2.5rem;
+    }
+    .home-text-content {
+        text-align: center; /* Teks jadi di tengah */
+    }
+    .home-text-content h1 {
+        font-size: 2.25rem;
+    }
+    .home-text-content p {
+        max-width: 100%; /* Lebar penuh */
+        font-size: 1rem;
+    }
+    .home-image-content {
+        order: -1; /* Pindahkan gambar ke atas di tablet */
+    }
+    .home-hero-image {
+        max-width: 300px; /* Kecilkan gambar sedikit */
+    }
+}
+
+@media (max-width: 768px) {
+    /* --- Responsive Navbar --- */
+    .navbar {
+        flex-direction: row; 
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    /* STYLE SEARCH FORM (MOBILE) */
+    .search-form {
+        flex-basis: 100%; /* Lebar penuh */
+        order: 2; /* Pindah ke baris kedua */
+        margin: 0; /* Hapus margin horizontal */
+    }
+    
+    .hamburger-btn {
+        display: inline-flex; 
+    }
+
+    .nav-links {
+        display: none; 
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        flex-basis: 100%; 
+        order: 3; /* Pindah ke baris ketiga */
+        background-color: var(--bg-white);
+        padding: 1.5rem;
+        margin-top: 0; /* Hapus margin atas */
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    .nav-links.is-active {
+        display: flex; 
+    }
+
+    .nav-links a {
+        padding: 0.5rem;
+        border-bottom: none; 
+    }
+    
+    .nav-links .btn-sm {
+        text-align: center;
+        padding: 0.75rem 1.5rem; 
+    }
+
+    .admin-table {
+        min-width: 800px;
+    }
+    
+    /* Responsive Home Split (Mobile) */
+    .home-split-layout {
+        padding: 2rem 1.5rem;
+    }
+    .home-cta-button {
+        width: 100%; /* Tombol lebar penuh di mobile */
+    }
+}
