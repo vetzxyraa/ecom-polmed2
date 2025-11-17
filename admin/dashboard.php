@@ -1,13 +1,11 @@
 <?php
-require '../templates/admin_header.php'; // Sudah termasuk init.php & cek login
+require '../templates/admin_header.php';
 
-// Logika untuk update status
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] == 'update_status') {
     $order_id = (int)$_POST['order_id'];
     $status = $_POST['status'];
     $admin_message = trim($_POST['admin_message']);
 
-    // Validasi status
     $allowed_statuses = ['pending', 'berhasil', 'gagal'];
     if ($order_id > 0 && in_array($status, $allowed_statuses)) {
         try {
@@ -25,8 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
     exit;
 }
 
-
-// Ambil semua pesanan
 $orders = [];
 try {
     $sql = "SELECT o.*, p.name as product_name 
@@ -69,7 +65,6 @@ try {
                         Produk: <?php echo htmlspecialchars($order['product_name']); ?><br>
                         Jumlah: <?php echo $order['quantity']; ?> pcs<br>
                         Total: <?php echo format_rupiah($order['total_price']); ?><br>
-                        <!-- Menampilkan metode bayar -->
                         Metode Bayar: <strong><?php echo htmlspecialchars($order['payment_method']); ?></strong>
                     </td>
                     <td class="customer-details">
@@ -110,7 +105,7 @@ try {
                             
                             <div class="form-group">
                                 <label for="pesan_<?php echo $order['id']; ?>" class="sr-only">Pesan Admin</label>
-                                <textarea name="admin_message" id="pesan_<?php echo $order['id']; ?>" class="form-control" placeholder="Pesan untuk pelanggan (opsional)"><?php echo htmlspecialchars($order['admin_message'] ?? ''); ?></textarea>
+                                <textarea name="admin_message" id="pesan_<?php echo $order['id']; ?>" class="form-control" placeholder="Pesan (opsional)"><?php echo htmlspecialchars($order['admin_message'] ?? ''); ?></textarea>
                             </div>
                             
                             <button type="submit" class="btn btn-primary btn-sm">Update</button>

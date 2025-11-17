@@ -1,5 +1,5 @@
 <?php
-require 'templates/header.php'; // Sudah termasuk init.php
+require 'templates/header.php';
 
 $order_code = isset($_GET['kode_pesanan']) ? trim($_GET['kode_pesanan']) : '';
 $order = null;
@@ -31,7 +31,7 @@ if (!empty($order_code)) {
     <form action="status.php" method="GET">
         <div class="form-group">
             <label for="kode_pesanan">Masukkan Kode Pesanan Anda</label>
-            <input type="text" id="kode_pesanan" name="kode_pesanan" class="form-control" value="<?php echo htmlspecialchars($order_code); ?>" placeholder="Contoh: TB-ABC12345" required>
+            <input type="text" id="kode_pesanan" name="kode_pesanan" class="form-control" value="<?php echo htmlspecialchars($order_code); ?>" placeholder="Masukkan kode pesanan..." required>
         </div>
         <button type="submit" class="btn btn-primary">
             <i class="bi bi-search"></i> Cari Pesanan
@@ -48,7 +48,7 @@ if (!empty($order_code)) {
         <strong>Status:</strong> 
         <?php
             $status = htmlspecialchars($order['status']);
-            $status_class = 'status-badge-pending'; // Default
+            $status_class = 'status-badge-pending';
             if ($status == 'berhasil') $status_class = 'status-badge-success';
             if ($status == 'gagal') $status_class = 'status-badge-failed';
         ?>
@@ -65,16 +65,12 @@ if (!empty($order_code)) {
     <p class="status-info"><strong>Alamat:</strong> <?php echo htmlspecialchars($order['customer_address']); ?></p>
     
     
-    <!-- ====================================================== -->
-    <!-- BLOK BARU: Tampilkan instruksi pembayaran jika 'pending' -->
-    <!-- ====================================================== -->
     <?php if ($order['status'] == 'pending'): ?>
         <div class="message-box info" style="text-align: left; margin-top: 1rem;">
             <strong>Segera lakukan pembayaran ke:</strong>
             <hr style="border: 0; border-top: 1px dashed var(--warning-border); margin: 0.75rem 0;">
             
             <?php
-            // Ambil info payment dari settings
             $payment_bank_name = get_setting('payment_bank_name');
             $payment_ewallet_name = get_setting('payment_ewallet_name');
             
@@ -95,7 +91,7 @@ if (!empty($order_code)) {
              <p style="margin-top: 1rem;">
                 Total Pembayaran: <strong><?php echo format_rupiah($order['total_price']); ?></strong>
             </p>
-            <small style="margin-top: 0.5rem; display: block;">Pesanan akan diproses setelah pembayaran dikonfirmasi oleh admin.</small>
+            <small style="margin-top: 0.5rem; display: block;">Pesanan akan diproses setelah konfirmasi pembayaran.</small>
         </div>
     
     <?php elseif ($order['status'] == 'berhasil'): ?>
@@ -104,9 +100,6 @@ if (!empty($order_code)) {
             <p style="margin-top: 5px;">Pembayaran Anda telah dikonfirmasi. Terima kasih!</p>
         </div>
     <?php endif; ?>
-    <!-- ====================================================== -->
-    <!-- AKHIR BLOK BARU -->
-    <!-- ====================================================== -->
 
     <?php if (!empty($order['admin_message'])): ?>
         <div class="message-box admin-note" style="margin-top: 1rem;">

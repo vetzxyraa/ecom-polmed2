@@ -1,32 +1,23 @@
-/* * File CSS Baru untuk E-Commerce
- * Skema Warna: Teal/Green
- * FITUR: Hamburger Menu
- * FIX: Tombol Halaman Detail
- * UPDATE: Home Split Layout
- * TAMBAHAN: Search Bar
- */
-
 :root {
-    --primary-color: #0d9488; /* teal-600 */
-    --primary-dark: #0f766e;  /* teal-700 */
-    --secondary-color: #334155; /* slate-700 */
-    --text-color: #475569;      /* slate-600 */
-    --text-light: #64748b;    /* slate-500 */
-    --bg-light: #f1f5f9;      /* slate-100 */
+    --primary-color: #0d9488;
+    --primary-dark: #0f766e;
+    --secondary-color: #334155;
+    --text-color: #475569;
+    --text-light: #64748b;
+    --bg-light: #f1f5f9;
     --bg-white: #ffffff;
-    --border-color: #e2e8f0;    /* slate-200 */
-    --success-bg: #f0fdf4;    /* green-50 */
-    --success-text: #166534; /* green-800 */
-    --success-border: #86efac; /* green-300 */
-    --error-bg: #fef2f2;      /* red-50 */
-    --error-text: #991b1b;   /* red-800 */
-    --error-border: #fecaca;   /* red-300 */
-    --warning-bg: #fffbeb;   /* yellow-50 */
-    --warning-text: #b45309; /* yellow-700 */
-    --warning-border: #fde68a; /* yellow-300 */
+    --border-color: #e2e8f0;
+    --success-bg: #f0fdf4;
+    --success-text: #166534;
+    --success-border: #86efac;
+    --error-bg: #fef2f2;
+    --error-text: #991b1b;
+    --error-border: #fecaca;
+    --warning-bg: #fffbeb;
+    --warning-text: #b45309;
+    --warning-border: #fde68a;
 }
 
-/* --- Base --- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -84,7 +75,6 @@ main.content-wrapper {
     display: inline-block;
 }
 
-/* --- Header & Footer --- */
 .main-header {
     background-color: var(--bg-white);
     border-bottom: 1px solid var(--border-color);
@@ -118,15 +108,12 @@ main.content-wrapper {
     color: var(--secondary-color);
 }
 
-/* ====================================================== */
-/* STYLE SEARCH FORM */
-/* ====================================================== */
 .search-form {
     display: flex;
     gap: 0.5rem;
-    flex-grow: 1; /* Ambil ruang sisa */
-    max-width: 400px; /* Batasi lebar */
-    margin: 0 1.5rem; /* Beri jarak */
+    flex-grow: 1;
+    max-width: 400px;
+    margin: 0 1.5rem;
 }
 .search-form .form-control {
     padding-top: 0.5rem;
@@ -137,9 +124,6 @@ main.content-wrapper {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
 }
-/* ====================================================== */
-/* AKHIR STYLE SEARCH FORM */
-/* ====================================================== */
 
 .nav-links {
     display: flex;
@@ -167,8 +151,6 @@ main.content-wrapper {
     margin-top: auto;
 }
 
-
-/* --- Tombol --- */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -212,7 +194,7 @@ main.content-wrapper {
     color: var(--bg-white);
 }
 .btn-danger:hover {
-    background-color: #b91c1c; /* red-800 */
+    background-color: #b91c1c;
     color: var(--bg-white);
 }
 
@@ -221,7 +203,6 @@ main.content-wrapper {
     font-size: 0.875rem;
 }
 
-/* --- Form & Card --- */
 .card {
     background: var(--bg-white);
     border: 1px solid var(--border-color);
@@ -268,13 +249,11 @@ textarea.form-control {
     resize: vertical;
 }
 
-/* --- Halaman Home (Split Layout) --- */
 .home-split-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 2.5rem;
-    /* Background gradient warna tema */
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
     color: var(--bg-white);
     padding: 4rem;
@@ -292,7 +271,7 @@ textarea.form-control {
 
 .home-text-content p {
     font-size: 1.1rem;
-    color: #d1faea; /* Warna teal yang sangat muda */
+    color: #d1faea;
     line-height: 1.7;
     max-width: 90%;
 }
@@ -306,9 +285,9 @@ textarea.form-control {
 
 .home-hero-image {
     width: 100%;
-    max-width: 350px; /* Batas ukuran gambar */
+    max-width: 350px;
     height: auto;
-    aspect-ratio: 1 / 1; /* Paksa rasio 1:1 (kotak) */
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 12px;
     border: 4px solid var(--bg-white);
@@ -316,8 +295,7 @@ textarea.form-control {
 }
 
 .home-cta-button {
-    margin-top: 2rem; /* Jarak dari gambar */
-    /* Tombol dibuat putih agar kontras */
+    margin-top: 2rem;
     background-color: var(--bg-white);
     color: var(--primary-dark);
     font-weight: 700;
@@ -331,7 +309,6 @@ textarea.form-control {
 }
 
 
-/* --- Product Grid --- */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -390,7 +367,6 @@ textarea.form-control {
     width: 100%;
 }
 
-/* --- Product Detail --- */
 .product-detail-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -436,7 +412,6 @@ textarea.form-control {
     white-space: pre-wrap;
 }
 
-/* FIX: Tombol Detail Produk */
 .product-detail-actions {
     display: flex;
     flex-direction: row; 
@@ -463,7 +438,6 @@ textarea.form-control {
     cursor: not-allowed;
 }
 
-/* --- Status & Checkout --- */
 .status-card {
     padding: 2rem;
 }
@@ -509,7 +483,6 @@ textarea.form-control {
     margin-bottom: 0.5rem;
 }
 
-/* --- Admin --- */
 .admin-nav {
     background-color: var(--secondary-color);
 }
@@ -656,69 +629,63 @@ textarea.form-control {
     border-color: var(--warning-border);
 }
 .message-box.admin-note {
-    background-color: #eef2ff; /* indigo-50 */
-    color: #3730a3; /* indigo-800 */
-    border-color: #c7d2fe; /* indigo-200 */
+    background-color: #eef2ff;
+    color: #3730a3;
+    border-color: #c7d2fe;
     font-size: 0.9rem;
     margin-top: 0.75rem;
 }
 
-/* --- Tambahan untuk Hamburger Menu --- */
 .hamburger-btn {
-    display: none; /* Sembunyi di desktop */
+    display: none;
     background: none;
     border: none;
     color: var(--secondary-color);
     font-size: 2rem;
     cursor: pointer;
     padding: 0 0.5rem;
-    z-index: 10; /* Pastikan di atas menu */
+    z-index: 10;
 }
 
-
-/* --- Responsive --- */
 @media (max-width: 992px) {
     .product-detail-layout {
         grid-template-columns: 1fr;
     }
     
-    /* Responsive Home Split */
     .home-split-layout {
-        grid-template-columns: 1fr; /* Tumpuk di tablet */
+        grid-template-columns: 1fr;
         gap: 2rem;
         padding: 2.5rem;
     }
     .home-text-content {
-        text-align: center; /* Teks jadi di tengah */
+        text-align: center;
     }
     .home-text-content h1 {
         font-size: 2.25rem;
     }
     .home-text-content p {
-        max-width: 100%; /* Lebar penuh */
+        max-width: 100%;
         font-size: 1rem;
     }
     .home-image-content {
-        order: -1; /* Pindahkan gambar ke atas di tablet */
+        order: -1;
     }
     .home-hero-image {
-        max-width: 300px; /* Kecilkan gambar sedikit */
+        max-width: 300px;
     }
 }
 
 @media (max-width: 768px) {
-    /* --- Responsive Navbar --- */
     .navbar {
         flex-direction: row; 
         flex-wrap: wrap;
         gap: 1rem;
     }
 
-    /* STYLE SEARCH FORM (MOBILE) */
     .search-form {
-        flex-basis: 100%; /* Lebar penuh */
-        order: 2; /* Pindah ke baris kedua */
-        margin: 0; /* Hapus margin horizontal */
+        flex-basis: 100%;
+        order: 2;
+        margin: 0;
     }
     
     .hamburger-btn {
@@ -731,10 +698,10 @@ textarea.form-control {
         align-items: stretch;
         gap: 1rem;
         flex-basis: 100%; 
-        order: 3; /* Pindah ke baris ketiga */
+        order: 3;
         background-color: var(--bg-white);
         padding: 1.5rem;
-        margin-top: 0; /* Hapus margin atas */
+        margin-top: 0;
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
@@ -757,11 +724,10 @@ textarea.form-control {
         min-width: 800px;
     }
     
-    /* Responsive Home Split (Mobile) */
     .home-split-layout {
         padding: 2rem 1.5rem;
     }
     .home-cta-button {
-        width: 100%; /* Tombol lebar penuh di mobile */
+        width: 100%;
     }
 }

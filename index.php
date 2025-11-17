@@ -1,28 +1,21 @@
 <?php
-require 'templates/header.php'; // Sudah termasuk init.php
+require 'templates/header.php';
 
-// Ambil konten untuk Halaman Home
 $shop_name = get_setting('shop_name', 'Toko Baru');
 $about_text = get_setting('shop_about_text', 'Selamat datang di toko kami. Silakan atur deskripsi ini di panel admin.');
-$hero_image = get_setting('shop_about_image'); // Menggunakan gambar 'About'
+$hero_image = get_setting('shop_about_image');
 
-// Tentukan URL gambar
 if (empty($hero_image)) {
-    $image_url = 'https://placehold.co/400x400/0d9488/ffffff?text=Atur+Gambar+di+Admin';
+    $image_url = 'https://placehold.co/400x400/0d9488/ffffff?text=Toko';
 } elseif (!filter_var($hero_image, FILTER_VALIDATE_URL)) {
-    // Jika file lokal
     $image_url = BASE_URL . '/assets/img/' . htmlspecialchars($hero_image);
 } else {
-    // Jika URL eksternal
     $image_url = htmlspecialchars($hero_image);
 }
-$fallback_url = 'https://placehold.co/400x400/e2e8f0/475569?text=Gambar+Error';
+$fallback_url = 'https://placehold.co/400x400/e2e8f0/475569?text=Error';
 
 ?>
 
-<!-- 
-  Struktur Halaman Home Baru (Split Layout)
--->
 <section class="home-split-layout">
     <div class="home-text-content">
         <h1><?php echo htmlspecialchars($shop_name); ?></h1>

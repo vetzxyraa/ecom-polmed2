@@ -1,10 +1,8 @@
 <?php
-require '../templates/admin_header.php'; // Sudah termasuk init.php & cek login
+require '../templates/admin_header.php';
 
-// Cek pesan flash dari aksi tambah/edit/hapus
 display_flash_message('product_msg');
 
-// Ambil semua produk
 $products = [];
 try {
     $products = $db->query("SELECT * FROM products ORDER BY id DESC")->fetchAll();
@@ -41,18 +39,16 @@ try {
                 <tr>
                     <td>
                         <?php
-                        // PERUBAHAN: Hanya 'image'
                         $img_url = $product['image'];
                         if (!filter_var($img_url, FILTER_VALIDATE_URL)) {
                             $img_url = BASE_URL . '/assets/img/' . htmlspecialchars($img_url);
                         }
-                        $fallback_url = 'https://placehold.co/100x100/e2e8f0/475569?text=N/A';
+                        $fallback_url = 'https://placehold.co/100x100/e2e8f0/475569?text=Image';
                         ?>
                         <img src="<?php echo $img_url; ?>" alt="" class="product-thumb" onerror="this.onerror=null; this.src='<?php echo $fallback_url; ?>';">
                     </td>
                     <td><strong><?php echo htmlspecialchars($product['name']); ?></strong></td>
                     <td><?php echo format_rupiah($product['price']); ?></td>
-                    <!-- PERBAIKAN: Mengganti 'stok' menjadi 'stock' -->
                     <td><?php echo $product['stock']; ?></td>
                     <td>
                         <div class="actions">
@@ -62,7 +58,7 @@ try {
                             <a href="kelola_produk.php?action=delete&id=<?php echo $product['id']; ?>" 
                                class="btn btn-danger btn-sm" 
                                title="Hapus"
-                               onclick="return confirm('Anda yakin ingin menghapus produk ini? Pesanan terkait akan tetap ada, namun produk tidak bisa dipesan lagi.');">
+                               onclick="return confirm('Hapus produk ini? Tindakan ini tidak dapat dibatalkan.');">
                                 <i class="bi bi-trash-fill"></i> Hapus
                             </a>
                         </div>

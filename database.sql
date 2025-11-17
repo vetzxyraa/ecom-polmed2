@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Nov 15, 2025 at 08:20 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -16,17 +7,8 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `toko_baru`
---
 CREATE DATABASE IF NOT EXISTS `toko_baru` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `toko_baru`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
@@ -47,12 +29,6 @@ CREATE TABLE IF NOT EXISTS `orders` (
   KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `products`
---
-
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -64,19 +40,9 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `products`
---
-
 INSERT INTO `products` (`id`, `name`, `price`, `stock`, `description`, `image`) VALUES
-(1, 'Produk Keren A', 55000, 15, 'Deskripsi baru untuk produk keren A. Dibuat dengan bahan berkualitas premium.', 'https://placehold.co/600x600/2dd4bf/ffffff?text=Produk+A1'),
-(2, 'Produk Keren B', 75000, 8, 'Deskripsi baru untuk produk keren B. Desain minimalis dan modern.', 'https://placehold.co/600x600/2dd4bf/ffffff?text=Produk+B1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `site_settings`
---
+(1, 'Produk Keren A', 55000, 15, 'Deskripsi singkat produk A.', 'https://placehold.co/600x600/0d9488/ffffff?text=Produk+A'),
+(2, 'Produk Keren B', 75000, 8, 'Deskripsi singkat produk B.', 'https://placehold.co/600x600/0d9488/ffffff?text=Produk+B');
 
 DROP TABLE IF EXISTS `site_settings`;
 CREATE TABLE IF NOT EXISTS `site_settings` (
@@ -85,30 +51,20 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
   PRIMARY KEY (`setting_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `site_settings`
---
-
 INSERT INTO `site_settings` (`setting_key`, `setting_value`) VALUES
 ('admin_password', '$2y$10$f5.3.D/S5Z.g8e.E2QpY.OFb6v4zO8T5bGIiB.P61.lS9X/3GKuB2'),
 ('admin_user', 'admin'),
-('owner_name', 'Nama Admin Baru'),
-('payment_bank_account', '123456789 a/n Toko Baru'),
+('owner_name', 'Nama Pemilik Toko'),
+('payment_bank_account', '123456789 a/n Pemilik Toko'),
 ('payment_bank_name', 'BCA'),
-('payment_ewallet_name', 'GoPay/OVO/DANA'),
-('payment_ewallet_number', '08123456789 a/n Toko Baru'),
-('shop_address', 'Jl. Baru No. 123, Medan, Indonesia'),
-('shop_about_image', 'https://placehold.co/400x400/0d9488/ffffff?text=Foto+Toko'),
-('shop_about_text', 'Ini adalah deskripsi baru untuk halaman tentang kami. Kami fokus pada kualitas terbaik.'),
-('shop_email', 'kontak@tokobaru.com'),
-('shop_name', 'Toko Baru'),
-('shop_whatsapp', '6281234567890');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
+('payment_ewallet_name', 'GoPay'),
+('payment_ewallet_number', '08123456789 a/n Pemilik Toko'),
+('shop_address', 'Jl. Contoh No. 1, Kota, 12345'),
+('shop_about_image', 'https://placehold.co/400x400/0d9488/ffffff?text=Toko'),
+('shop_about_text', 'Selamat datang di toko kami.'),
+('shop_email', 'kontak@domain.com'),
+('shop_name', 'Nama Toko'),
+('shop_whatsapp', '628123456789');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
@@ -119,20 +75,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `users`
---
-
 INSERT INTO `users` (`id`, `username`, `password_hash`) VALUES
 (1, 'admin', '$2y$10$f5.3.D/S5Z.g8e.E2QpY.OFb6v4zO8T5bGIiB.P61.lS9X/3GKuB2');
 
---
--- Constraints for dumped tables
---
 
---
--- Constraints for table `orders`
---
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 COMMIT;

@@ -1,33 +1,28 @@
 <?php
-require '../templates/admin_header.php'; // Sudah termasuk init.php & cek login
+require '../templates/admin_header.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $page_title = "Tambah Produk Baru";
 
-// Data produk default (hanya 1 gambar dan 'stock')
 $product = [
     'id' => $id,
     'name' => '',
     'price' => '',
-    'stock' => '', // Menggunakan 'stock'
+    'stock' => '',
     'description' => '',
-    'image' => '', // Hanya 'image'
+    'image' => '',
 ];
 
-// --- LOGIKA DELETE ---
 if ($action == 'delete' && $id > 0) {
     try {
-        // Ambil nama file gambar untuk dihapus
         $stmt_get = $db->prepare("SELECT image FROM products WHERE id = ?");
         $stmt_get->execute([$id]);
         $image_name = $stmt_get->fetchColumn();
 
-        // Hapus produk dari DB
         $stmt_del = $db->prepare("DELETE FROM products WHERE id = ?");
         $stmt_del->execute([$id]);
 
-        // Hapus file gambar jika ada
         $upload_dir = __DIR__ . "/../assets/img/";
         if (!empty($image_name) && !filter_var($image_name, FILTER_VALIDATE_URL) && file_exists($upload_dir . $image_name)) {
             unlink($upload_dir . $image_name);
@@ -41,7 +36,6 @@ if ($action == 'delete' && $id > 0) {
     exit;
 }
 
-// --- LOGIKA EDIT (Ambil data) ---
 if ($id > 0) {
     $page_title = "Edit Produk";
     try {
@@ -60,16 +54,14 @@ if ($id > 0) {
     }
 }
 
-// --- LOGIKA SIMPAN (Create/Update) ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = (int)$_POST['id'];
     $name = trim($_POST['name']);
     $price = (int)$_POST['price'];
-    $stock = (int)$_POST['stock']; // Menggunakan 'stock'
+    $stock = (int)$_POST['stock'];
     $description = trim($_POST['description']);
     $image_url = trim($_POST['image_url']);
     
-    // Ambil nama gambar lama
     $old_image = $_POST['old_image'];
     $new_image_name = $old_image;
 
@@ -78,10 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mkdir($upload_dir, 0755, true);
     }
 
-    // Fungsi helper untuk upload (disederhanakan)
     function handle_upload($file_key, $old_name, $url_input, $prefix, $upload_dir) {
         if (!empty($url_input)) {
-            // Jika URL diisi, hapus file lama (jika ada) dan gunakan URL
             if (!empty($old_name) && !filter_var($old_name, FILTER_VALIDATE_URL) && file_exists($upload_dir . $old_name)) {
                 unlink($upload_dir . $old_name);
             }
@@ -94,32 +84,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $new_name = $prefix . time() . "." . $ext;
             
             if (move_uploaded_file($_FILES[$file_key]["tmp_name"], $upload_dir . $new_name)) {
-                // Hapus file lama jika sukses upload
                 if (!empty($old_name) && !filter_var($old_name, FILTER_VALIDATE_URL) && file_exists($upload_dir . $old_name)) {
                     unlink($upload_dir . $old_name);
                 }
-                return $new_name; // Kembalikan nama file baru
+                return $new_name;
             }
         }
-        return $old_name; // Kembalikan nama lama jika tidak ada upload/URL baru
+        return $old_name;
     }
 
     $new_image_name = handle_upload('image_file', $old_image, $image_url, 'prod_', $upload_dir);
 
-    // Jika produk baru dan tidak ada gambar, gunakan placeholder
     if ($id == 0 && empty($new_image_name)) {
-        $new_image_name = 'https://placehold.co/600x600/e2e8f0/475569?text=' . urlencode($name);
+        $new_image_name = 'https://placehold.co/600x600/e2e8f0/475569?text=' . urlencode('Produk');
     }
 
-    // Update atau Insert
     try {
         if ($id > 0) {
-            // UPDATE
             $sql = "UPDATE products SET name = ?, price = ?, stock = ?, description = ?, image = ? WHERE id = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([$name, $price, $stock, $description, $new_image_name, $id]);
         } else {
-            // INSERT
             $sql = "INSERT INTO products (name, price, stock, description, image) VALUES (?, ?, ?, ?, ?)";
             $stmt = $db->prepare($sql);
             $stmt->execute([$name, $price, $stock, $description, $new_image_name]);
@@ -130,16 +115,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } catch (PDOException $e) {
         set_flash_message('form_msg', 'Gagal menyimpan produk: ' . $e->getMessage(), 'error');
-        // Set ulang data form agar tidak hilang
         $product = $_POST;
-        $product['image'] = $old_image; // Tetap tampilkan gambar lama jika gagal
+        $product['image'] = $old_image;
     }
 }
 
-// Fungsi untuk menampilkan preview
 function get_preview_src($img_name) {
     if (empty($img_name)) {
-        return 'https://placehold.co/200x200/e2e8f0/475569?text=Kosong';
+        return 'https://placehold.co/200x200/e2e8f0/475569?text=No+Image';
     }
     if (filter_var($img_name, FILTER_VALIDATE_URL)) {
         return htmlspecialchars($img_name);
@@ -186,10 +169,10 @@ function get_preview_src($img_name) {
             
             <label for="image_file" style="font-weight: 500;">Upload File Baru:</label>
             <input type="file" id="image_file" name="image_file" class="form-control" accept="image/jpeg,image/png,image/gif">
-            <small>Abaikan jika tidak ingin ganti, atau tempel URL di bawah.</small>
+            <small>Abaikan jika tidak ganti, atau isi URL di bawah.</small>
 
             <label for="image_url" style="font-weight: 500; margin-top: 1rem;">Tempel URL Gambar:</label>
-            <input type="text" id="image_url" name="image_url" class="form-control" placeholder="https://..." value="<?php echo filter_var($product['image'], FILTER_VALIDATE_URL) ? htmlspecialchars($product['image']) : ''; ?>">
+            <input type="text" id="image_url" name="image_url" class="form-control" placeholder="https://example.com/image.png" value="<?php echo filter_var($product['image'], FILTER_VALIDATE_URL) ? htmlspecialchars($product['image']) : ''; ?>">
         </div>
         
         <button type="submit" class="btn btn-primary">

@@ -1,5 +1,5 @@
 <?php
-require 'templates/header.php'; // Sudah termasuk init.php
+require 'templates/header.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $product = null;
@@ -22,26 +22,23 @@ if (!$product) {
     exit;
 }
 
-// PERUBAHAN: Hanya 1 gambar, tidak perlu galeri
 $image_url = $product['image'];
 if (empty($image_url)) {
-    $image_url = 'https://placehold.co/600x600/e2e8f0/475569?text=No+Image';
+    $image_url = 'https://placehold.co/600x600/e2e8f0/475569?text=Produk';
 } elseif (!filter_var($image_url, FILTER_VALIDATE_URL)) {
     $image_url = BASE_URL . '/assets/img/' . htmlspecialchars($image_url);
 }
 
-$fallback_url = 'https://placehold.co/600x600/e2e8f0/475569?text=Gambar+Error';
+$fallback_url = 'https://placehold.co/600x600/e2e8f0/475569?text=Error';
 ?>
 
 <div class="product-detail-layout card">
-    <!-- Galeri Gambar (Sekarang hanya 1 gambar) -->
     <div class="product-detail-gallery">
         <img src="<?php echo htmlspecialchars($image_url); ?>" 
              alt="<?php echo htmlspecialchars($product['name']); ?>"
              onerror="this.onerror=null; this.src='<?php echo $fallback_url; ?>';">
     </div>
     
-    <!-- Info Produk -->
     <div class="product-detail-info">
         <h1 class="name"><?php echo htmlspecialchars($product['name']); ?></h1>
         <p class="price"><?php echo format_rupiah($product['price']); ?></p>

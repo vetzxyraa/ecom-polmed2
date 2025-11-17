@@ -1,23 +1,17 @@
 <?php
-require 'templates/header.php'; // Sudah termasuk init.php
+require 'templates/header.php';
 
-// ======================================================
-// PERUBAHAN: Logika untuk menangani pencarian
-// ======================================================
 $search_term = isset($_GET['q']) ? trim($_GET['q']) : '';
 $products = [];
 $params = [];
 
-// Mulai query dasar
 $sql = "SELECT * FROM products";
 
-// Jika ada istilah pencarian, tambahkan WHERE
 if (!empty($search_term)) {
     $sql .= " WHERE name LIKE ?";
-    $params[] = '%' . $search_term . '%'; // Tambahkan wildcard %
+    $params[] = '%' . $search_term . '%';
 }
 
-// Tambahkan ORDER BY (stock > 0 diutamakan)
 $sql .= " ORDER BY stock > 0 DESC, id DESC";
 
 try {
@@ -27,12 +21,8 @@ try {
 } catch (PDOException $e) {
     echo "<div class='message-box error'>Gagal memuat produk: " . $e->getMessage() . "</div>";
 }
-// ======================================================
-// AKHIR PERUBAHAN LOGIKA
-// ======================================================
 ?>
 
-<!-- PERUBAHAN: Judul halaman dinamis berdasarkan pencarian -->
 <?php if (!empty($search_term)): ?>
     <h1 class="page-title">Hasil Pencarian: "<?php echo htmlspecialchars($search_term); ?>"</h1>
 <?php else: ?>
@@ -42,14 +32,13 @@ try {
 
 <div class="product-grid">
     <?php if (empty($products)): ?>
-        <!-- Pesan disesuaikan jika sedang mencari -->
         <?php if (!empty($search_term)): ?>
             <p style="grid-column: 1 / -1; text-align: center; font-size: 1.1rem;">
-                Produk dengan nama "<?php echo htmlspecialchars($search_term); ?>" tidak ditemukan.
+                Pencarian "<?php echo htmlspecialchars($search_term); ?>" tidak ditemukan.
             </p>
         <?php else: ?>
             <p style="grid-column: 1 / -1; text-align: center; font-size: 1.1rem;">
-                Belum ada produk yang tersedia saat ini.
+                Belum ada produk.
             </p>
         <?php endif; ?>
     <?php else: ?>
@@ -57,14 +46,11 @@ try {
             <div class="product-card card">
                 <a href="produk.php?id=<?php echo $product['id']; ?>" class="product-card-image">
                     <?php 
-                    // Menggunakan satu kolom 'image'
                     $image_url = $product['image'];
-                    // Cek jika bukan URL eksternal, tambahkan BASE_URL
                     if (!filter_var($image_url, FILTER_VALIDATE_URL)) {
                         $image_url = BASE_URL . '/assets/img/' . htmlspecialchars($image_url);
                     }
-                    // Fallback jika gambar error
-                    $fallback_url = 'https://placehold.co/400x400/e2e8f0/475569?text=Gambar+Rusak';
+                    $fallback_url = 'https://placehold.co/400x400/e2e8f0/475569?text=Error';
                     ?>
                     <img src="<?php echo htmlspecialchars($image_url); ?>" 
                          alt="<?php echo htmlspecialchars($product['name']); ?>"
