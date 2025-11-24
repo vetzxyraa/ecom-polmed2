@@ -63,8 +63,19 @@ try {
                         <strong><?php echo htmlspecialchars($order['order_code']); ?></strong><br>
                         <small><?php echo date('d M Y, H:i', strtotime($order['order_date'])); ?></small><br>
                         Produk: <?php echo htmlspecialchars($order['product_name']); ?><br>
+                        
+                        <?php if (!empty($order['selected_variant'])): ?>
+                            Varian: <strong><?php echo htmlspecialchars($order['selected_variant']); ?></strong><br>
+                        <?php endif; ?>
+                        
                         Jumlah: <?php echo $order['quantity']; ?> pcs<br>
-                        Total: <?php echo format_rupiah($order['total_price']); ?><br>
+                        <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+                        
+                        <div style="font-size: 0.9rem; color: #555;">
+                            Subtotal: <?php echo format_rupiah($order['subtotal_price']); ?><br>
+                            Ongkir: <?php echo format_rupiah($order['shipping_cost']); ?>
+                        </div>
+                        <strong style="font-size: 1.1rem;">Total: <?php echo format_rupiah($order['total_price']); ?></strong><br>
                         Metode Bayar: <strong><?php echo htmlspecialchars($order['payment_method']); ?></strong>
                     </td>
                     <td class="customer-details">

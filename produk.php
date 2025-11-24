@@ -1,4 +1,10 @@
 <?php
+// VVV 3 BARIS INI WAJIB UNTUK DEBUG VVV
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+// ^^^ 3 BARIS INI WAJIB UNTUK DEBUG ^^^
+
 require 'templates/header.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -21,6 +27,9 @@ if (!$product) {
     require 'templates/footer.php';
     exit;
 }
+
+// Ambil dan proses varian
+$variants = !empty($product['available_variants']) ? array_map('trim', explode(',', $product['available_variants'])) : [];
 
 $image_url = $product['image'];
 if (empty($image_url)) {
@@ -54,6 +63,19 @@ $fallback_url = 'https://placehold.co/600x600/e2e8f0/475569?text=Error';
             <p><?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
         </div>
         
+        <?php if (!empty($variants)): ?>
+            <div class="variants-list" style="margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 0.75rem; color: var(--secondary-color);">Varian Tersedia:</h3>
+                <ul style="list-style-type: disc; list-style-position: inside; padding-left: 5px;">
+                    <?php foreach ($variants as $variant): ?>
+                        <li style="font-size: 1rem; color: var(--text-color); margin-bottom: 5px;">
+                            <?php echo htmlspecialchars($variant); ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+                <small style="margin-top: 1rem; display: block; color: var(--text-light);">Anda akan memilih varian di halaman checkout.</small>
+            </div>
+        <?php endif; ?>
         <div class="product-detail-actions">
             <?php if ($product['stock'] > 0): ?>
                 <a href="checkout.php?id=<?php echo $product['id']; ?>" class="btn btn-primary">

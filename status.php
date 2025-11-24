@@ -1,4 +1,9 @@
 <?php
+// Hapus 3 baris ini jika web sudah normal
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require 'templates/header.php';
 
 $order_code = isset($_GET['kode_pesanan']) ? trim($_GET['kode_pesanan']) : '';
@@ -58,8 +63,19 @@ if (!empty($order_code)) {
     </p>
     
     <p class="status-info"><strong>Produk:</strong> <?php echo htmlspecialchars($order['product_name']); ?></p>
+    
+    <?php if (!empty($order['selected_variant'])): ?>
+    <p class="status-info"><strong>Varian:</strong> <?php echo htmlspecialchars($order['selected_variant']); ?></p>
+    <?php endif; ?>
+
     <p class="status-info"><strong>Jumlah:</strong> <?php echo $order['quantity']; ?> pcs</p>
-    <p class="status-info"><strong>Total:</strong> <?php echo format_rupiah($order['total_price']); ?></p>
+    
+    <p class="status-info"><strong>Subtotal:</strong> <?php echo format_rupiah($order['subtotal_price']); ?></p>
+    <p class="status-info"><strong>Ongkir:</strong> <?php echo format_rupiah($order['shipping_cost']); ?></p>
+    <p class="status-info" style="font-size: 1.2rem; font-weight: 700;">
+        <strong>Total:</strong> <?php echo format_rupiah($order['total_price']); ?>
+    </p>
+    
     <p class="status-info"><strong>Metode Bayar:</strong> <?php echo htmlspecialchars($order['payment_method']); ?></p>
     <p class="status-info"><strong>Atas Nama:</strong> <?php echo htmlspecialchars($order['customer_name']); ?></p>
     <p class="status-info"><strong>Alamat:</strong> <?php echo htmlspecialchars($order['customer_address']); ?></p>
@@ -88,11 +104,20 @@ if (!empty($order_code)) {
                  <p>Metode pembayaran tidak valid. Silakan hubungi admin.</p>
             <?php endif; ?>
             
-             <p style="margin-top: 1rem;">
+             <p style="margin-top: 1rem; font-size: 1.1rem;">
                 Total Pembayaran: <strong><?php echo format_rupiah($order['total_price']); ?></strong>
             </p>
             <small style="margin-top: 0.5rem; display: block;">Pesanan akan diproses setelah konfirmasi pembayaran.</small>
-        </div>
+            
+            <?php
+                $wa_number = get_setting('shop_whatsapp');
+                $wa_text = "Halo, saya ingin konfirmasi pembayaran untuk pesanan: *" . $order['order_code'] . "*. Berikut saya kirimkan bukti transfernya.";
+                $wa_link = "https://api.whatsapp.com/send?phone=" . htmlspecialchars($wa_number) . "&text=" . urlencode($wa_text);
+            ?>
+            <a href="<?php echo $wa_link; ?>" target="_blank" class="btn btn-primary" style="background-color: #25D366; margin-top: 1.5rem; width: 100%;">
+                <i class="bi bi-whatsapp"></i> Kirim Bukti Transfer via WhatsApp
+            </a>
+            </div>
     
     <?php elseif ($order['status'] == 'berhasil'): ?>
          <div class="message-box success" style="margin-top: 1rem;">

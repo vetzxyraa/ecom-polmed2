@@ -43,9 +43,9 @@ function display_flash_message(string $name): void {
 function require_admin_login(): void {
     if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
         set_flash_message('login_error', 'Anda harus login untuk mengakses halaman ini.', 'error');
+        // KEMBALI KE /admin/
         header('Location: ' . BASE_URL . '/admin/index.php');
         exit;
     }
 }
-
 ?>

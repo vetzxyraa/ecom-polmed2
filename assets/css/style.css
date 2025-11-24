@@ -1,12 +1,20 @@
+/*
+ * V4 Style for Snack Lab
+ * (Tema Biru Muda + Welcome Banner)
+ */
+
 :root {
-    --primary-color: #0d9488;
-    --primary-dark: #0f766e;
+    /* Palet Warna Baru (Biru Muda / Light Blue) */
+    --primary-color: #3B82F6; /* Biru */
+    --primary-dark: #2563EB; /* Biru Tua */
+    
     --secondary-color: #334155;
-    --text-color: #475569;
+    --text-color: #1E293B;
     --text-light: #64748b;
-    --bg-light: #f1f5f9;
+    --bg-light: #F8FAFC;
     --bg-white: #ffffff;
-    --border-color: #e2e8f0;
+    --border-color: #E2E8F0;
+    
     --success-bg: #f0fdf4;
     --success-text: #166534;
     --success-border: #86efac;
@@ -16,6 +24,8 @@
     --warning-bg: #fffbeb;
     --warning-text: #b45309;
     --warning-border: #fde68a;
+    
+    --font-main: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -25,7 +35,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-main);
     background-color: var(--bg-light);
     color: var(--text-color);
     line-height: 1.6;
@@ -61,20 +71,23 @@ ul {
 
 main.content-wrapper {
     flex-grow: 1;
-    padding-top: 2rem;
-    padding-bottom: 3rem;
+    padding-top: 2.5rem;
+    padding-bottom: 3.5rem;
 }
 
 .page-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
     color: var(--secondary-color);
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
     padding-bottom: 0.5rem;
     display: inline-block;
 }
 
+/* =================================
+ * HEADER & NAVIGASI (WARNA BIRU)
+ * ================================= */
 .main-header {
     background-color: var(--bg-white);
     border-bottom: 1px solid var(--border-color);
@@ -82,9 +95,8 @@ main.content-wrapper {
     position: sticky;
     top: 0;
     z-index: 10;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
-
 
 .navbar {
     display: flex;
@@ -96,13 +108,13 @@ main.content-wrapper {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 800;
     color: var(--secondary-color);
 }
 .logo i {
-    color: var(--primary-color);
-    font-size: 1.5rem;
+    color: var(--primary-color); /* Warna Ikon Biru */
+    font-size: 1.75rem;
 }
 .logo:hover {
     color: var(--secondary-color);
@@ -132,14 +144,15 @@ main.content-wrapper {
 }
 
 .nav-links a {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-light);
     padding-bottom: 4px;
-    border-bottom: 2px solid transparent;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
 }
 .nav-links a:hover,
 .nav-links a.active {
-    color: var(--primary-color);
+    color: var(--primary-color); /* Warna Active Biru */
     border-bottom-color: var(--primary-color);
 }
 
@@ -147,23 +160,27 @@ main.content-wrapper {
     background-color: var(--secondary-color);
     color: var(--bg-light);
     text-align: center;
-    padding: 2rem 0;
+    padding: 2.5rem 0;
     margin-top: auto;
 }
 
+/* =================================
+ * TOMBOL (BUTTONS) (WARNA BIRU)
+ * ================================= */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 700;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: center;
+    font-family: var(--font-main);
 }
 .btn i {
     font-size: 1.1em;
@@ -176,7 +193,7 @@ main.content-wrapper {
 .btn-primary:hover {
     background-color: var(--primary-dark);
     color: var(--bg-white);
-    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); /* Shadow Biru */
 }
 
 .btn-secondary {
@@ -199,22 +216,30 @@ main.content-wrapper {
 }
 
 .btn-sm {
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 1rem;
     font-size: 0.875rem;
 }
 
+/* =================================
+ * KARTU (CARD)
+ * ================================= */
 .card {
     background: var(--bg-white);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
     overflow: hidden;
+    border: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .form-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2.5rem;
 }
 
 .form-group {
@@ -222,7 +247,7 @@ main.content-wrapper {
 }
 .form-group label {
     display: block;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
     color: var(--secondary-color);
@@ -242,28 +267,32 @@ main.content-wrapper {
 .form-control:active {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Focus Biru */
 }
 textarea.form-control {
     min-height: 120px;
     resize: vertical;
 }
 
+/* =================================
+ * HALAMAN HOME (SPLIT LAYOUT) (WARNA BIRU)
+ * ================================= */
 .home-split-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 2.5rem;
+    /* Gradient warna biru baru */
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
     color: var(--bg-white);
     padding: 4rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(15, 118, 110, 0.3);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3); /* Shadow Biru */
 }
 
 .home-text-content h1 {
     font-size: 2.75rem;
-    font-weight: 700;
+    font-weight: 800;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     margin-bottom: 1rem;
     color: #ffffff;
@@ -271,7 +300,7 @@ textarea.form-control {
 
 .home-text-content p {
     font-size: 1.1rem;
-    color: #d1faea;
+    color: #DBEAFE; /* Teks biru muda */
     line-height: 1.7;
     max-width: 90%;
 }
@@ -289,7 +318,7 @@ textarea.form-control {
     height: auto;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 4px solid var(--bg-white);
     box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
@@ -300,6 +329,8 @@ textarea.form-control {
     color: var(--primary-dark);
     font-weight: 700;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
 }
 .home-cta-button:hover {
     background-color: var(--bg-light);
@@ -309,6 +340,9 @@ textarea.form-control {
 }
 
 
+/* =================================
+ * KARTU PRODUK (PRODUCT CARD)
+ * ================================= */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -318,6 +352,7 @@ textarea.form-control {
 .product-card {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 .product-card-image {
     width: 100%;
@@ -335,69 +370,81 @@ textarea.form-control {
     transform: scale(1.05);
 }
 .product-card-content {
-    padding: 1.25rem;
+    padding: 1rem 1.25rem 1.25rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 .product-card-title {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: var(--secondary-color);
     margin-bottom: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 2.2rem;
 }
 .product-card-price {
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 800;
     color: var(--primary-dark);
     margin-bottom: 0.5rem;
 }
 .product-card-stock {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     color: var(--text-light);
     margin-bottom: 1rem;
 }
 .product-card-actions {
     margin-top: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* <-- KEMBALIKAN KE 2 KOLOM */
     gap: 0.5rem;
 }
 .product-card-actions .btn {
     width: 100%;
 }
+.product-card-actions .btn-secondary {
+    background-color: var(--bg-light);
+}
 
+/* =================================
+ * DETAIL PRODUK
+ * ================================= */
 .product-detail-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    padding: 1.5rem;
 }
 .product-detail-gallery img {
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 1px solid var(--border-color);
-    margin-bottom: 1rem;
 }
 .product-detail-info .name {
-    font-size: 2.25rem;
-    font-weight: 700;
+    font-size: 2.5rem;
+    font-weight: 800;
     color: var(--secondary-color);
     margin-bottom: 0.5rem;
 }
 .product-detail-info .price {
-    font-size: 1.75rem;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 800;
     color: var(--primary-dark);
     margin-bottom: 1rem;
 }
 .product-detail-info .stock {
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 6px;
+    padding: 0.35rem 1rem;
+    border-radius: 99px;
     background-color: var(--warning-bg);
     color: var(--warning-text);
     margin-bottom: 1.5rem;
@@ -410,8 +457,8 @@ textarea.form-control {
     font-size: 1rem;
     margin-bottom: 2rem;
     white-space: pre-wrap;
+    line-height: 1.7;
 }
-
 .product-detail-actions {
     display: flex;
     flex-direction: row; 
@@ -421,7 +468,8 @@ textarea.form-control {
 .product-detail-actions .btn {
     flex-grow: 1; 
     flex-basis: 200px; 
-    font-size: 1rem; 
+    font-size: 1.1rem; 
+    padding: 0.8rem 1.5rem;
 }
 
 .product-detail-actions .btn-whatsapp {
@@ -438,8 +486,11 @@ textarea.form-control {
     cursor: not-allowed;
 }
 
+/* =================================
+ * HALAMAN STATUS & CHECKOUT
+ * ================================= */
 .status-card {
-    padding: 2rem;
+    padding: 2.5rem;
 }
 .status-info {
     font-size: 1.1rem;
@@ -451,10 +502,10 @@ textarea.form-control {
     display: inline-block;
 }
 .status-badge {
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 1rem;
     border-radius: 99px;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: capitalize;
 }
 .status-badge-pending {
@@ -473,7 +524,7 @@ textarea.form-control {
 .checkout-summary {
     background: var(--bg-light);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 2rem;
 }
@@ -483,6 +534,9 @@ textarea.form-control {
     margin-bottom: 0.5rem;
 }
 
+/* =================================
+ * PANEL ADMIN (WARNA BIRU)
+ * ================================= */
 .admin-nav {
     background-color: var(--secondary-color);
 }
@@ -552,14 +606,15 @@ textarea.form-control {
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
 }
 .admin-table {
     width: 100%;
     border-collapse: collapse;
     background-color: var(--bg-white);
-    border-radius: 8px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
 .admin-table th,
 .admin-table td {
@@ -572,6 +627,7 @@ textarea.form-control {
     font-size: 0.875rem;
     color: var(--text-light);
     text-transform: uppercase;
+    font-weight: 700;
 }
 .admin-table td {
     vertical-align: middle;
@@ -583,7 +639,7 @@ textarea.form-control {
     width: 60px;
     height: 60px;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 .admin-table .actions {
     display: flex;
@@ -606,11 +662,14 @@ textarea.form-control {
     color: var(--secondary-color);
 }
 
+/* =================================
+ * KOTAK PESAN (MESSAGE BOX)
+ * ================================= */
 .message-box {
     padding: 1rem 1.5rem;
     margin-bottom: 1.5rem;
-    border-radius: 8px;
-    font-weight: 500;
+    border-radius: 12px;
+    font-weight: 600;
     border: 1px solid transparent;
 }
 .message-box.success {
@@ -636,6 +695,9 @@ textarea.form-control {
     margin-top: 0.75rem;
 }
 
+/* =================================
+ * RESPONSIVE (MEDIA QUERIES)
+ * ================================= */
 .hamburger-btn {
     display: none;
     background: none;
@@ -702,7 +764,7 @@ textarea.form-control {
         background-color: var(--bg-white);
         padding: 1.5rem;
         margin-top: 0;
-        border-radius: 8px;
+        border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
     
@@ -729,5 +791,19 @@ textarea.form-control {
     }
     .home-cta-button {
         width: 100%;
+    }
+    
+    .page-title {
+        font-size: 1.75rem;
+    }
+    .product-detail-layout {
+        gap: 1.5rem;
+        grid-template-columns: 1fr;
+    }
+    .product-detail-info .name {
+        font-size: 2rem;
+    }
+    .product-detail-info .price {
+        font-size: 1.75rem;
     }
 }

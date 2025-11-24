@@ -11,6 +11,8 @@ $product = [
     'price' => '',
     'stock' => '',
     'description' => '',
+    'available_variants' => '',
+    'shipping_cost' => 0, // <-- FIELD BARU
     'image' => '',
 ];
 
@@ -60,6 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price = (int)$_POST['price'];
     $stock = (int)$_POST['stock'];
     $description = trim($_POST['description']);
+    $available_variants = trim($_POST['available_variants']);
+    $shipping_cost = (int)$_POST['shipping_cost']; // <-- AMBIL ONGKIR BARU
     $image_url = trim($_POST['image_url']);
     
     $old_image = $_POST['old_image'];
@@ -71,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     function handle_upload($file_key, $old_name, $url_input, $prefix, $upload_dir) {
+        // ... (fungsi handle_upload tidak berubah) ...
         if (!empty($url_input)) {
             if (!empty($old_name) && !filter_var($old_name, FILTER_VALIDATE_URL) && file_exists($upload_dir . $old_name)) {
                 unlink($upload_dir . $old_name);
@@ -101,13 +106,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         if ($id > 0) {
-            $sql = "UPDATE products SET name = ?, price = ?, stock = ?, description = ?, image = ? WHERE id = ?";
+            // VVV UPDATE SQL DENGAN ONGKIR BARU VVV
+            $sql = "UPDATE products SET name = ?, price = ?, stock = ?, description = ?, 
+                        available_variants = ?, shipping_cost = ?, image = ? 
+                    WHERE id = ?";
             $stmt = $db->prepare($sql);
-            $stmt->execute([$name, $price, $stock, $description, $new_image_name, $id]);
+            $stmt->execute([$name, $price, $stock, $description, $available_variants, $shipping_cost, $new_image_name, $id]);
         } else {
-            $sql = "INSERT INTO products (name, price, stock, description, image) VALUES (?, ?, ?, ?, ?)";
+            // VVV INSERT SQL DENGAN ONGKIR BARU VVV
+            $sql = "INSERT INTO products (name, price, stock, description, available_variants, shipping_cost, image) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $db->prepare($sql);
-            $stmt->execute([$name, $price, $stock, $description, $new_image_name]);
+            $stmt->execute([$name, $price, $stock, $description, $available_variants, $shipping_cost, $new_image_name]);
         }
         set_flash_message('product_msg', 'Produk berhasil disimpan.', 'success');
         header('Location: ' . BASE_URL . '/admin/daftar_produk.php');
@@ -152,6 +162,12 @@ function get_preview_src($img_name) {
             <label for="price">Harga (Rp)</label>
             <input type="number" id="price" name="price" class="form-control" value="<?php echo htmlspecialchars($product['price']); ?>" min="1" required>
         </div>
+        
+        <div class="form-group">
+            <label for="shipping_cost">Harga Ongkir (Rp)</label>
+            <input type="number" id="shipping_cost" name="shipping_cost" class="form-control" value="<?php echo htmlspecialchars($product['shipping_cost']); ?>" min="0" required>
+            <small>Ongkir untuk produk ini. Isi 0 jika gratis ongkir.</small>
+        </div>
         <div class="form-group">
             <label for="stock">Stok</label>
             <input type="number" id="stock" name="stock" class="form-control" value="<?php echo htmlspecialchars($product['stock']); ?>" min="0" required>
@@ -159,6 +175,12 @@ function get_preview_src($img_name) {
         <div class="form-group">
             <label for="description">Deskripsi</label>
             <textarea id="description" name="description" class="form-control" required><?php echo htmlspecialchars($product['description']); ?></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="available_variants">Varian Tersedia (Pisahkan dengan koma)</label>
+            <input type="text" id="available_variants" name="available_variants" class="form-control" value="<?php echo htmlspecialchars($product['available_variants'] ?? ''); ?>">
+            <small>Contoh: Pedas, Pedas Manis. Kosongkan jika tidak ada varian.</small>
         </div>
         
         <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">

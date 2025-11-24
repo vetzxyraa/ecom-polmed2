@@ -6,7 +6,7 @@ $about_text = get_setting('shop_about_text', 'Selamat datang di toko kami. Silak
 $hero_image = get_setting('shop_about_image');
 
 if (empty($hero_image)) {
-    $image_url = 'https://placehold.co/400x400/0d9488/ffffff?text=Toko';
+    $image_url = 'https://placehold.co/400x400/3B82F6/ffffff?text=Toko'; // <-- Warna disesuaikan ke biru
 } elseif (!filter_var($hero_image, FILTER_VALIDATE_URL)) {
     $image_url = BASE_URL . '/assets/img/' . htmlspecialchars($hero_image);
 } else {

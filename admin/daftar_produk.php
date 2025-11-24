@@ -1,10 +1,17 @@
 <?php
+// VVV 3 BARIS INI WAJIB UNTUK DEBUG VVV
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+// ^^^ 3 BARIS INI WAJIB UNTUK DEBUG ^^^
+
 require '../templates/admin_header.php';
 
 display_flash_message('product_msg');
 
 $products = [];
 try {
+    // Kueri SELECT * sudah otomatis mengambil kolom baru
     $products = $db->query("SELECT * FROM products ORDER BY id DESC")->fetchAll();
 } catch (PDOException $e) {
     echo "<div class='message-box error'>Gagal memuat produk: " . $e->getMessage() . "</div>";
